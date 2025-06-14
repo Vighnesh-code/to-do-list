@@ -1,10 +1,7 @@
 import { FaMoon } from "react-icons/fa";
 import { FaPlusSquare } from "react-icons/fa";
-import { useState } from "react";
 
-const Menu = () => {
-  const [task, setTask] = useState("");
-
+const Menu = ({ task, setTask, handleTaskAdd }) => {
   return (
     <div className="flex justify-evenly w-1/2">
       <div className="flex items-center">
@@ -16,7 +13,7 @@ const Menu = () => {
           value={task}
           onChange={(e) => setTask(e.target.value)}
         />
-        <FaPlusSquare className="size-9" />
+        <FaPlusSquare className="size-9" onClick={handleTaskAdd} />
       </div>
       <button className="h-10 w-16 bg-slate-300 rounded-md text-black">
         <p>All</p>
