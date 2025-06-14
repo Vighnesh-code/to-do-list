@@ -4,14 +4,19 @@ import TaskList from "./components/TaskList";
 
 function App() {
   const [task, setTask] = useState("");
-  const [taskList, setTaskList] = useState([]);
+  const [taskList, setTaskList] = useState(() => {
+    const stored = sessionStorage?.getItem("tasks");
+    return stored ? JSON.parse(stored) : [];
+  });
 
   const handleTaskAdd = useCallback(() => {
+    if (task.trim() === "") return;
     setTaskList((prev) => [...prev, task]);
+    setTask("");
   }, [task]);
 
   useEffect(() => {
-    console.log("TaskList: ", taskList);
+    window.sessionStorage.setItem("tasks", JSON.stringify(taskList));
   }, [taskList]);
 
   return (
